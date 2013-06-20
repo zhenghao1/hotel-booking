@@ -1,5 +1,6 @@
-var express = require("express");
- 
+var express = require("express"),
+    routes = require("./routes");
+
 var app = express();
 app.use(express.logger());
 
@@ -15,9 +16,8 @@ app.configure(function(){
   app.engine('html', require('ejs').renderFile);
 });
 
-app.get('/', function(request, response) {
-  response.render('index.html')
-});
+// Initial route to index.html
+app.get('*', routes.index);
 
 var port = process.env.PORT || 5000;
 app.listen(port, function() {
